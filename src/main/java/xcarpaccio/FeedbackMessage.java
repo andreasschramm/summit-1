@@ -27,15 +27,17 @@ public class FeedbackMessage {
         this.type = type;
     }
 
-    public String getContent() {
-        return message;
-    }
 
-    public void setContent(String content) {
-        this.message = content;
-    }
 
-    public String json() throws IOException {
+    public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public String json() throws IOException {
         return objectMapper.writeValueAsString(this);
     }
 

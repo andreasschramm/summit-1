@@ -8,4 +8,12 @@ public class Quote {
 
 	Double quote = Double.valueOf(0F);
 
+	public Double getQuote() {
+		return quote;
+	}
+
+	public void setQuote(Double quote) {
+		this.quote = quote;
+	}
+
 }

@@ -88,8 +88,8 @@ public class MyHttpServer
             InputStream body = request.getRequestBody();
 
             try {
-                FeedbackMessage message = objectMapper.readValue(body, FeedbackMessage.class);
-                logger.log(message.getType() + ": " + message.getContent());
+                FeedbackMessage incommingMessage = objectMapper.readValue(body, FeedbackMessage.class);
+                logger.log(incommingMessage.getType() + ": " + incommingMessage.getMessage());
             } catch (IOException exception) {
                 logger.error(exception.getMessage());
             }
@@ -107,6 +107,9 @@ public class MyHttpServer
                 String uri = request.getRequestURI().getPath();
                 String requestBody = stringify(request.getRequestBody());
                 logger.log(method + " " + uri + " " + requestBody);
+                if (requestBody == null || requestBody.equals("")) {
+                	return error();
+                }
                 QuoteRequest incomingRequest = objectMapper.readValue(requestBody, QuoteRequest.class);
                 logger.log("Unserialized order: " + incomingRequest);
                 
