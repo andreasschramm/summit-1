@@ -8,7 +8,7 @@ public class FeedbackMessage {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     private String type;
-    private String content;
+    private String message;
 
     // Required by Jackson
     private FeedbackMessage() {
@@ -16,7 +16,7 @@ public class FeedbackMessage {
 
     public FeedbackMessage(String type, String content) {
         this.type = type;
-        this.content = content;
+        this.message = content;
     }
 
     public String getType() {
@@ -28,11 +28,11 @@ public class FeedbackMessage {
     }
 
     public String getContent() {
-        return content;
+        return message;
     }
 
     public void setContent(String content) {
-        this.content = content;
+        this.message = content;
     }
 
     public String json() throws IOException {
@@ -44,17 +44,17 @@ public class FeedbackMessage {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        FeedbackMessage message = (FeedbackMessage) o;
+        FeedbackMessage other = (FeedbackMessage) o;
 
-        if (type != null ? !type.equals(message.type) : message.type != null) return false;
-        return !(content != null ? !content.equals(message.content) : message.content != null);
+        if (type != null ? !type.equals(other.type) : other.type != null) return false;
+        return !(other != null ? !other.equals(other.message) : other.message != null);
 
     }
 
     @Override
     public int hashCode() {
         int result = type != null ? type.hashCode() : 0;
-        result = 31 * result + (content != null ? content.hashCode() : 0);
+        result = 31 * result + (message != null ? message.hashCode() : 0);
         return result;
     }
 
@@ -62,7 +62,7 @@ public class FeedbackMessage {
     public String toString() {
         return "Message{" +
                 "type='" + type + '\'' +
-                ", content='" + content + '\'' +
+                ", content='" + message + '\'' +
                 '}';
     }
 }

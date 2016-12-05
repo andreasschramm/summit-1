@@ -1,4 +1,4 @@
- package xcarpaccio;
+ package xcarpaccio.quotes;
 
 import java.time.Instant;
 import java.util.ArrayList;

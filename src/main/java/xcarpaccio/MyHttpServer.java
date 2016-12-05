@@ -3,6 +3,11 @@ package xcarpaccio;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
+
+import xcarpaccio.quotes.Quote;
+import xcarpaccio.quotes.QuoteRequest;
+import xcarpaccio.quotes.QuoteService;
+
 import org.codehaus.jackson.map.ObjectMapper;
 
 import java.io.IOException;
@@ -22,6 +27,8 @@ public class MyHttpServer
     private final Logger logger;
 
     private HttpServer server;
+    
+    private QuoteService quoteService = new QuoteService();
 
     public MyHttpServer(int port, Logger logger) {
         this.port = port;
@@ -103,14 +110,9 @@ public class MyHttpServer
                 QuoteRequest incomingRequest = objectMapper.readValue(requestBody, QuoteRequest.class);
                 logger.log("Unserialized order: " + incomingRequest);
                 
-                
-                
-               // int numberOfDays = incomingRequest.departureDate.
-                
-                Quote quote = new Quote();
-                quote.quote = 45.0;
 
-                return ok(objectMapper.writeValueAsString(quote)); 
+
+                return ok(objectMapper.writeValueAsString(quoteService.getQuote(incomingRequest))); 
             } catch (IOException e) {
                 logger.log(e);
                 return error();
